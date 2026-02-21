@@ -1,0 +1,109 @@
+---
+interface Props {
+  name: string;
+  emoji: string;
+  tagline: string;
+  description: string;
+  capabilities: string[];
+  color: string;
+  online?: boolean;
+}
+
+const { name, emoji, tagline, description, capabilities, color, online = true } = Astro.props;
+---
+
+<div class="agent-card glass reveal">
+  <div class="agent-header">
+    <div class="agent-avatar" style={`background: ${color}20; color: ${color};`}>
+      {emoji}
+    </div>
+    <div class="agent-status">
+      <div class={`status-dot ${online ? '' : 'offline'}`}></div>
+      <span class="status-text">{online ? 'Online' : 'Offline'}</span>
+    </div>
+  </div>
+  
+  <h3 class="agent-name">{name}</h3>
+  <p class="agent-tagline" style={`color: ${color};`}>{tagline}</p>
+  <p class="agent-desc">{description}</p>
+  
+  <div class="agent-caps">
+    {capabilities.map(cap => (
+      <span class="cap-tag">{cap}</span>
+    ))}
+  </div>
+  
+  <a href={`/agents/${name.toLowerCase()}`} class="agent-link">
+    Learn more →
+  </a>
+</div>
+
+<style>
+  .agent-card {
+    padding: 2rem;
+    transition: all 0.2s var(--ease-out);
+  }
+  .agent-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+  }
+  .agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  .agent-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  .agent-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-dot.offline { background: var(--text-tertiary); animation: none; }
+  .status-text { font-size: 0.75rem; color: var(--text-tertiary); font-weight: 500; }
+  .agent-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .agent-tagline {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .agent-desc {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .agent-caps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .cap-tag {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .agent-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--brand);
+    transition: color 0.15s;
+  }
+  .agent-link:hover { color: var(--brand-hover); }
+</style>

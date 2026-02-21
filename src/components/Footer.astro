@@ -1,0 +1,82 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><span class="logo-dot">.</span>Rockets</a>
+        <p class="footer-desc">Open Source AI Agents & Automation.<br/>Built from Koh Phangan 🌴</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/agents">Agents</a>
+        <a href="/services">Services</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/status">Status</a>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="/blog">Blog</a>
+        <a href="/case-studies">Case Studies</a>
+        <a href="/docs">Documentation</a>
+        <a href="https://github.com/dotrockets" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="/contact">Contact</a>
+        <a href="https://t.me/dotrockets" target="_blank" rel="noopener">Telegram</a>
+        <a href="mailto:hello@dotrockets.space">Email</a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; {year} DotRockets. Open source, open mind.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/imprint">Imprint</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 4rem 0 2rem;
+    margin-top: 6rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  .logo-dot { color: var(--brand); font-size: 1.5rem; }
+  .logo { font-weight: 700; font-size: 1.25rem; }
+  .footer-desc { color: var(--text-tertiary); font-size: 0.875rem; margin-top: 0.75rem; line-height: 1.6; }
+  .footer-col { display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col h4 { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); }
+  .footer-col a { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.15s; }
+  .footer-col a:hover { color: var(--text-primary); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+  }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--text-tertiary); transition: color 0.15s; }
+  .footer-links a:hover { color: var(--text-secondary); }
+</style>

@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const plans = [
+  {
+    name: 'Starter', price: '€500', period: 'one-time', desc: 'For solopreneurs',
+    features: ['3 automation flows', 'Self-hosted setup', 'Email support', 'Documentation'],
+    cta: 'Get Started', popular: false,
+  },
+  {
+    name: 'Growth', price: '€2,000', period: 'one-time', desc: 'For growing teams',
+    features: ['10 automation flows', '1 custom AI agent', 'Priority support', '2h training session', 'Knowledge base setup'],
+    cta: 'Most Popular', popular: true,
+  },
+  {
+    name: 'Enterprise', price: 'Custom', period: 'let\'s talk', desc: 'For established businesses',
+    features: ['Unlimited flows', 'Multiple AI agents', 'Dedicated support', 'Full team onboarding', 'Custom integrations', '3-month support'],
+    cta: 'Contact Us', popular: false,
+  },
+];
+---
+
+<BaseLayout title="Pricing — One-Time, No Subscriptions | DotRockets" description="Transparent pricing for AI automation. Pay once, own forever. Starting at €500.">
+  <Header slot="header" />
+  
+  <section class="page-header">
+    <div class="container">
+      <h1 class="reveal">Transparent Pricing.<br/><span class="gradient-text">No Surprises.</span></h1>
+      <p class="page-sub reveal">Pay for what you need. Scale when you're ready. Own it forever.</p>
+    </div>
+  </section>
+  
+  <section class="container">
+    <div class="pricing-grid">
+      {plans.map(plan => (
+        <div class={`pricing-card glass reveal ${plan.popular ? 'popular' : ''}`}>
+          {plan.popular && <div class="popular-badge">⭐ Most Popular</div>}
+          <h3>{plan.name}</h3>
+          <p class="plan-desc">{plan.desc}</p>
+          <div class="plan-price">
+            <span class="price">{plan.price}</span>
+            <span class="period">{plan.period}</span>
+          </div>
+          <ul class="plan-features">
+            {plan.features.map(f => <li>✓ {f}</li>)}
+          </ul>
+          <a href="/contact" class={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`} style="width: 100%; justify-content: center;">{plan.cta}</a>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Comparison -->
+    <div class="comparison glass reveal" style="margin-top: 4rem; padding: 2.5rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <h3 style="margin-bottom: 1.5rem;">Why One-Time Beats Monthly</h3>
+      <div class="compare-row">
+        <div class="compare-them">
+          <span class="compare-label">Others</span>
+          <span class="compare-value" style="color: var(--error);">$200/mo × 12 = $2,400/yr</span>
+        </div>
+        <div class="compare-us">
+          <span class="compare-label">DotRockets</span>
+          <span class="compare-value" style="color: var(--success);">€2,000 once. Forever.</span>
+        </div>
+      </div>
+      <p style="color: var(--text-tertiary); font-size: 0.875rem; margin-top: 1rem;">You save thousands every year after year one.</p>
+    </div>
+  </section>
+  
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-header { padding: 7rem 0 3rem; text-align: center; }
+  .page-header h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+  .page-sub { color: var(--text-secondary); margin-top: 0.75rem; font-size: 1.0625rem; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: start; }
+  .pricing-card { padding: 2rem; position: relative; display: flex; flex-direction: column; }
+  .pricing-card.popular { border-color: var(--brand); }
+  .popular-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--brand); color: white; font-size: 0.75rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .pricing-card h3 { font-size: 1.25rem; font-weight: 600; }
+  .plan-desc { color: var(--text-tertiary); font-size: 0.875rem; margin-top: 0.25rem; }
+  .plan-price { margin: 1.5rem 0; }
+  .price { font-size: 2.5rem; font-weight: 700; }
+  .period { color: var(--text-tertiary); font-size: 0.875rem; margin-left: 0.5rem; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; flex-grow: 1; }
+  .plan-features li { font-size: 0.875rem; color: var(--text-secondary); }
+  .compare-row { display: flex; flex-direction: column; gap: 1rem; }
+  .compare-them, .compare-us { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border-radius: 8px; background: var(--bg-tertiary); }
+  .compare-label { font-size: 0.875rem; font-weight: 500; }
+  .compare-value { font-size: 0.875rem; font-weight: 600; font-family: var(--font-mono); }
+</style>

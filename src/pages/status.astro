@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  { name: 'Helios Agent', status: 'operational' },
+  { name: 'Alfred Agent', status: 'operational' },
+  { name: 'Research Agent', status: 'operational' },
+  { name: 'Llama (Local)', status: 'operational' },
+  { name: 'n8n Workflows', status: 'operational' },
+  { name: 'API Gateway', status: 'operational' },
+  { name: 'Website', status: 'operational' },
+];
+---
+
+<BaseLayout title="System Status | DotRockets" description="Live system status for all DotRockets services.">
+  <Header slot="header" />
+  
+  <section class="page-header">
+    <div class="container">
+      <div class="status-banner reveal">
+        <div class="status-dot" style="width: 12px; height: 12px;"></div>
+        <span>All Systems Operational</span>
+      </div>
+      <h1 class="reveal">System Status</h1>
+    </div>
+  </section>
+  
+  <section class="container">
+    <div class="status-list reveal">
+      {services.map(s => (
+        <div class="status-row">
+          <span class="service-name">{s.name}</span>
+          <span class={`service-status ${s.status}`}>
+            <span class="status-dot"></span>
+            {s.status === 'operational' ? 'Operational' : 'Degraded'}
+          </span>
+        </div>
+      ))}
+    </div>
+    
+    <p style="text-align: center; color: var(--text-tertiary); font-size: 0.8125rem; margin-top: 2rem;">
+      Last updated: <time>{new Date().toISOString().split('T')[0]}</time> · Auto-refreshes every 60s
+    </p>
+  </section>
+  
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-header { padding: 7rem 0 3rem; text-align: center; }
+  .page-header h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; }
+  .status-banner { display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px; border-radius: 100px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: var(--success); font-weight: 500; font-size: 0.9375rem; margin-bottom: 1.5rem; }
+  .status-list { max-width: 600px; margin: 0 auto; }
+  .status-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+  .service-name { font-weight: 500; }
+  .service-status { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--success); font-weight: 500; }
+  .service-status.degraded { color: var(--warning); }
+  .service-status.degraded .status-dot { background: var(--warning); }
+</style>

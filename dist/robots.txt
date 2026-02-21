@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dotrockets.space/sitemap-index.xml

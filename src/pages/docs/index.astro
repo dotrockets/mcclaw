@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const sections = [
+  { title: 'Getting Started', items: ['Quick Start Guide', 'System Requirements', 'Installation'] },
+  { title: 'Agents', items: ['Agent Architecture', 'Helios Configuration', 'Alfred Setup', 'Custom Agents'] },
+  { title: 'Automations', items: ['n8n Basics', 'Workflow Templates', 'Custom Flows', 'Triggers & Webhooks'] },
+  { title: 'API Reference', items: ['Authentication', 'Endpoints', 'Rate Limits', 'Webhooks'] },
+];
+---
+
+<BaseLayout title="Documentation | DotRockets" description="Technical documentation for DotRockets AI agents and automation platform.">
+  <Header slot="header" />
+  
+  <section class="page-header">
+    <div class="container">
+      <h1 class="reveal">Documentation</h1>
+      <p class="page-sub reveal">Everything you need to set up, configure, and extend your AI agents.</p>
+    </div>
+  </section>
+  
+  <section class="container">
+    <div class="docs-grid">
+      {sections.map(s => (
+        <div class="docs-section glass reveal">
+          <h3>{s.title}</h3>
+          <ul>
+            {s.items.map(item => <li><a href="#">{item}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+  
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-header { padding: 7rem 0 3rem; text-align: center; }
+  .page-header h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; }
+  .page-sub { color: var(--text-secondary); margin-top: 0.75rem; }
+  .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .docs-section { padding: 2rem; }
+  .docs-section h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; }
+  .docs-section ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .docs-section a { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.15s; }
+  .docs-section a:hover { color: var(--brand); }
+</style>

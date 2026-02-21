@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AgentCard from '../components/AgentCard.astro';
+import LiveStats from '../components/LiveStats';
+
+const agents = [
+  {
+    name: 'Helios',
+    emoji: '☀️',
+    tagline: 'Your Spiritual Content Engine',
+    description: 'Transforms Schumann resonance data and spiritual insights into engaging content for wellness brands.',
+    capabilities: ['Content Generation', 'Schumann Tracking', 'Social Media', 'SEO'],
+    color: '#f97316',
+  },
+  {
+    name: 'Alfred',
+    emoji: '🎩',
+    tagline: 'Your Digital Butler',
+    description: 'Manages daily briefings, email triage, calendar optimization, and task prioritization.',
+    capabilities: ['Email Management', 'Calendar', 'Daily Briefings', 'Task Routing'],
+    color: '#3b82f6',
+  },
+  {
+    name: 'Research',
+    emoji: '🔍',
+    tagline: 'Intelligence on Demand',
+    description: 'Deep web research, competitive analysis, trend monitoring, and market intelligence.',
+    capabilities: ['Web Research', 'Competitive Analysis', 'Trend Monitoring', 'Reports'],
+    color: '#8b5cf6',
+  },
+  {
+    name: 'Llama',
+    emoji: '🦙',
+    tagline: 'Open Source. Local. Private.',
+    description: 'Powered by Meta\'s Llama models running locally. Full privacy, zero API costs, unlimited usage.',
+    capabilities: ['Local Inference', 'Privacy-First', 'Unlimited Usage', 'Fine-tuning'],
+    color: '#22c55e',
+  },
+];
+
+const features = [
+  { icon: '🤖', title: 'Agents, Not Tools', desc: 'Autonomous AI that thinks, decides, and delivers.' },
+  { icon: '⚡', title: 'Automate Everything', desc: 'Visual n8n workflows. Connect 400+ apps without code.' },
+  { icon: '🔓', title: '$0 vs $200/mo', desc: 'Same power as enterprise platforms. Zero cost. Full transparency.' },
+  { icon: '🌍', title: 'Nomad-Ready', desc: 'Run your business from anywhere. Works on beach WiFi.' },
+];
+---
+
+<BaseLayout title="DotRockets — Open Source AI Agents & Automation">
+  <Header slot="header" />
+  
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-badge reveal">
+        <span class="status-dot"></span>
+        4 Agents Live · 100% Open Source
+      </div>
+      
+      <h1 class="hero-title reveal">
+        AI Agents That Work.<br/>
+        <span class="gradient-text">For $0.</span>
+      </h1>
+      
+      <p class="hero-sub reveal">
+        Open-source AI automation for digital nomads and entrepreneurs.<br/>
+        No subscriptions. No vendor lock-in. Just results.
+      </p>
+      
+      <div class="hero-cta reveal">
+        <a href="/agents" class="btn btn-primary">Meet Our Agents →</a>
+        <a href="/pricing" class="btn btn-secondary">See Pricing</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Live Stats -->
+  <section class="container reveal">
+    <LiveStats client:visible />
+  </section>
+  
+  <!-- Features -->
+  <section class="section container">
+    <div class="features-grid">
+      {features.map(f => (
+        <div class="feature-card glass reveal">
+          <div class="feature-icon">{f.icon}</div>
+          <h3 class="feature-title">{f.title}</h3>
+          <p class="feature-desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+  
+  <!-- Agents Preview -->
+  <section class="section container">
+    <div class="section-header reveal">
+      <h2>Meet the Squad</h2>
+      <p class="section-sub">Four AI agents. Each with a specialty. All working together.</p>
+    </div>
+    <div class="agents-grid">
+      {agents.map(agent => (
+        <AgentCard {...agent} />
+      ))}
+    </div>
+  </section>
+  
+  <!-- Social Proof -->
+  <section class="section container">
+    <div class="proof-card glass reveal">
+      <blockquote class="proof-quote">
+        "From 2% to 12% conversion rate. Helios transformed our content strategy completely."
+      </blockquote>
+      <div class="proof-meta">
+        <strong>Haus der Energien</strong> · Case Study
+      </div>
+      <a href="/case-studies" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Case Study →</a>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="section container">
+    <div class="cta-section reveal">
+      <h2 class="gradient-text">Ready to automate?</h2>
+      <p class="cta-sub">Get started in under 24 hours. No setup fees.</p>
+      <div class="hero-cta">
+        <a href="/contact" class="btn btn-primary">Let's Talk →</a>
+        <a href="/services" class="btn btn-secondary">View Services</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 8rem 0 4rem;
+    text-align: center;
+  }
+  .hero-content { max-width: 800px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-sub {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .section { padding: 5rem 0; }
+  .section-header { text-align: center; margin-bottom: 3rem; }
+  .section-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+  .section-sub { color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.0625rem; }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  .feature-card { padding: 2rem; text-align: center; }
+  .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .feature-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .feature-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+  
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .proof-card {
+    padding: 3rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .proof-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .proof-meta {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+  }
+  
+  .cta-section {
+    text-align: center;
+    padding: 4rem 0;
+  }
+  .cta-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+  .cta-sub { color: var(--text-secondary); font-size: 1.0625rem; margin-bottom: 2rem; }
+</style>

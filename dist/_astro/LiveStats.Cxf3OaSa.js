@@ -1,0 +1,9 @@
+import{r as d}from"./index.DiEladB3.js";var f={exports:{}},s={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var m;function v(){if(m)return s;m=1;var e=Symbol.for("react.transitional.element"),x=Symbol.for("react.fragment");function o(a,t,r){var u=null;if(r!==void 0&&(u=""+r),t.key!==void 0&&(u=""+t.key),"key"in t){r={};for(var n in t)n!=="key"&&(r[n]=t[n])}else r=t;return t=r.ref,{$$typeof:e,type:a,key:u,ref:t!==void 0?t:null,props:r}}return s.Fragment=x,s.jsx=o,s.jsxs=o,s}var c;function R(){return c||(c=1,f.exports=v()),f.exports}var i=R();const h=[{label:"Automations Running",value:47},{label:"Hours Saved / Month",value:240,suffix:"+"},{label:"Uptime",value:99.9,suffix:"%"},{label:"Monthly Platform Cost",value:0,prefix:"$"}];function E({value:e,prefix:x="",suffix:o=""}){const[a,t]=d.useState(0);return d.useEffect(()=>{const n=e/40;let l=0;const p=setInterval(()=>{l++,t(l>=40?e:Math.round(n*l*10)/10),l>=40&&clearInterval(p)},1500/40);return()=>clearInterval(p)},[e]),i.jsxs("span",{style:{fontFamily:"var(--font-mono, monospace)",fontSize:"2.5rem",fontWeight:700,color:"var(--text-primary)"},children:[x,Number.isInteger(e)?Math.round(a):a.toFixed(1),o]})}function T(){return i.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))",gap:"2rem",padding:"3rem 0"},children:h.map(e=>i.jsxs("div",{style:{textAlign:"center"},children:[i.jsx(E,{value:e.value,prefix:e.prefix,suffix:e.suffix}),i.jsx("div",{style:{color:"var(--text-tertiary)",fontSize:"0.875rem",marginTop:"0.5rem",fontWeight:500},children:e.label})]},e.label))})}export{T as default};

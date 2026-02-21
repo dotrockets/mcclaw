@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  {
+    icon: '⚡', title: 'n8n Automation Flows', price: 'From €500/flow',
+    desc: 'Custom workflow design & implementation. Connect 400+ apps, automate repetitive tasks, self-hosted so you own everything.',
+    features: ['Custom workflow design', '400+ app integrations', 'Self-hosted on your infra', 'Documentation included'],
+  },
+  {
+    icon: '🤖', title: 'AI Agent Development', price: 'From €2,000/agent',
+    desc: 'Custom AI agents built for your business. Unique personality, trained on your knowledge base, integrated with your tools.',
+    features: ['Custom personality & behavior', 'Knowledge base training', 'Tool & API integrations', 'Autonomous operation'],
+  },
+  {
+    icon: '💡', title: 'AI Consulting', price: '€150/hour',
+    desc: 'Strategy sessions for AI adoption. Get expert guidance on which tools, models, and architectures fit your business.',
+    features: ['AI readiness assessment', 'Stack recommendations', 'ROI projections', 'Implementation roadmap'],
+  },
+  {
+    icon: '🏗️', title: 'Full AI Infrastructure', price: 'Custom pricing',
+    desc: 'Complete setup: agents + automations + monitoring + training. Everything you need to run AI-powered operations.',
+    features: ['End-to-end setup', 'Multiple agents & flows', 'Team training & docs', '3-month support included'],
+  },
+];
+---
+
+<BaseLayout title="AI Services & n8n Automation | DotRockets" description="Custom AI agents, n8n workflows, and consulting. Self-hosted, you own everything.">
+  <Header slot="header" />
+  
+  <section class="page-header">
+    <div class="container">
+      <h1 class="reveal">What We Build</h1>
+      <p class="page-sub reveal">From single automations to full AI infrastructure. Choose your level.</p>
+    </div>
+  </section>
+  
+  <section class="container">
+    <div class="services-grid">
+      {services.map(s => (
+        <div class="service-card glass reveal">
+          <div class="service-icon">{s.icon}</div>
+          <h3>{s.title}</h3>
+          <p class="service-price">{s.price}</p>
+          <p class="service-desc">{s.desc}</p>
+          <ul class="service-features">
+            {s.features.map(f => <li>✓ {f}</li>)}
+          </ul>
+          <a href="/contact" class="btn btn-secondary" style="width: 100%; justify-content: center; margin-top: auto;">Get Started</a>
+        </div>
+      ))}
+    </div>
+  </section>
+  
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-header { padding: 7rem 0 3rem; text-align: center; }
+  .page-header h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+  .page-sub { color: var(--text-secondary); margin-top: 0.75rem; font-size: 1.0625rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .service-card { padding: 2rem; display: flex; flex-direction: column; }
+  .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .service-card h3 { font-size: 1.25rem; font-weight: 600; }
+  .service-price { color: var(--brand); font-weight: 600; font-size: 0.9375rem; margin: 0.5rem 0 1rem; }
+  .service-desc { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.25rem; }
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .service-features li { font-size: 0.8125rem; color: var(--text-secondary); }
+</style>
