@@ -12,98 +12,218 @@ interface Props {
 const { name, emoji, tagline, description, capabilities, color, online = true } = Astro.props;
 ---
 
-<div class="agent-card glass reveal">
+<article
+  class="agent-card reveal"
+  style={`--agent-color: ${color}; --agent-color-muted: ${color}18;`}
+>
+  <!-- Top row: avatar + status -->
   <div class="agent-header">
-    <div class="agent-avatar" style={`background: ${color}20; color: ${color};`}>
-      {emoji}
+    <div class="agent-avatar">
+      <span class="agent-emoji">{emoji}</span>
     </div>
     <div class="agent-status">
       <div class={`status-dot ${online ? '' : 'offline'}`}></div>
-      <span class="status-text">{online ? 'Online' : 'Offline'}</span>
+      <span class="status-label">{online ? 'Online' : 'Offline'}</span>
     </div>
   </div>
-  
+
+  <!-- Info -->
   <h3 class="agent-name">{name}</h3>
-  <p class="agent-tagline" style={`color: ${color};`}>{tagline}</p>
+  <p class="agent-tagline">{tagline}</p>
   <p class="agent-desc">{description}</p>
-  
+
+  <!-- Caps -->
   <div class="agent-caps">
     {capabilities.map(cap => (
       <span class="cap-tag">{cap}</span>
     ))}
   </div>
-  
+
+  <!-- Link -->
   <a href={`/agents/${name.toLowerCase()}`} class="agent-link">
-    Learn more →
+    Learn more
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
   </a>
-</div>
+
+  <!-- Hover glow border (pseudo via clip trick) -->
+  <div class="agent-glow-border" aria-hidden="true"></div>
+</article>
 
 <style>
   .agent-card {
-    padding: 2rem;
-    transition: all 0.2s var(--ease-out);
+    position: relative;
+    background: var(--bg-card, var(--bg-secondary));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    transition:
+      border-color 0.25s var(--ease-out),
+      transform 0.25s var(--ease-out),
+      box-shadow 0.25s var(--ease-out);
   }
+
+  /* Accent top bar */
+  .agent-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--agent-color);
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: 0 0 3px 3px;
+  }
+
+  /* Gradient fill on hover */
+  .agent-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 30% -10%, var(--agent-color-muted), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s;
+    z-index: 0;
+  }
+
   .agent-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-hover);
+    border-color: color-mix(in srgb, var(--agent-color) 35%, var(--border));
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px color-mix(in srgb, var(--agent-color) 15%, transparent);
   }
+  .agent-card:hover::before { opacity: 1; }
+  .agent-card:hover::after  { opacity: 1; }
+
+  /* All inner content above pseudo layers */
+  .agent-header,
+  .agent-name,
+  .agent-tagline,
+  .agent-desc,
+  .agent-caps,
+  .agent-link {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Avatar ── */
   .agent-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.25rem;
+    justify-content: space-between;
+    margin-bottom: 1.375rem;
   }
   .agent-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--agent-color-muted);
+    border: 1px solid color-mix(in srgb, var(--agent-color) 25%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    transition: transform 0.25s var(--ease-spring);
   }
+  .agent-card:hover .agent-avatar {
+    transform: scale(1.08) rotate(-4deg);
+  }
+  .agent-emoji { font-size: 1.625rem; line-height: 1; }
+
+  /* ── Status ── */
   .agent-status {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
-  .status-dot.offline { background: var(--text-tertiary); animation: none; }
-  .status-text { font-size: 0.75rem; color: var(--text-tertiary); font-weight: 500; }
+  .status-dot.offline {
+    background: var(--text-muted);
+    animation: none;
+    box-shadow: none;
+  }
+  .status-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Name ── */
   .agent-name {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.025em;
     margin-bottom: 0.25rem;
+    color: var(--text-primary);
   }
+
+  /* ── Tagline ── */
   .agent-tagline {
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--agent-color);
+    margin-bottom: 0.875rem;
+    letter-spacing: 0.01em;
   }
+
+  /* ── Description ── */
   .agent-desc {
-    color: var(--text-secondary);
     font-size: 0.875rem;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1.375rem;
+    flex: 1;
   }
+
+  /* ── Capabilities ── */
   .agent-caps {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin-bottom: 1.5rem;
   }
   .cap-tag {
-    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 600;
     padding: 4px 10px;
-    border-radius: 100px;
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
-    font-weight: 500;
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--agent-color) 10%, var(--bg-tertiary));
+    color: var(--agent-color);
+    border: 1px solid color-mix(in srgb, var(--agent-color) 20%, transparent);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
+
+  /* ── Link ── */
   .agent-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--brand);
-    transition: color 0.15s;
+    font-weight: 600;
+    color: var(--agent-color);
+    border-radius: var(--radius-sm);
+    transition: gap 0.2s var(--ease-spring), opacity 0.15s;
+    width: fit-content;
   }
-  .agent-link:hover { color: var(--brand-hover); }
+  .agent-link:hover {
+    gap: 10px;
+    opacity: 0.85;
+  }
+
+  /* ── Glow border overlay (decorative) ── */
+  .agent-glow-border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    box-shadow: inset 0 0 0 1px var(--agent-color);
+    transition: opacity 0.3s;
+  }
+  .agent-card:hover .agent-glow-border { opacity: 0.25; }
 </style>

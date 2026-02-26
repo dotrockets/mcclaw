@@ -1,82 +1,247 @@
 ---
 const year = new Date().getFullYear();
+
+const columns = [
+  {
+    heading: 'Product',
+    links: [
+      { href: '/agents',       label: 'Agents' },
+      { href: '/services',     label: 'Services' },
+      { href: '/pricing',      label: 'Pricing' },
+      { href: '/status',       label: 'Status' },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { href: '/blog',                                   label: 'Blog' },
+      { href: '/case-studies',                           label: 'Case Studies' },
+      { href: '/docs',                                   label: 'Documentation' },
+      { href: 'https://github.com/dotrockets', label: 'GitHub ↗', external: true },
+    ],
+  },
+  {
+    heading: 'Connect',
+    links: [
+      { href: '/contact',                          label: 'Contact' },
+      { href: 'https://t.me/dotrockets', label: 'Telegram ↗', external: true },
+      { href: 'mailto:hello@dotrockets.space',     label: 'Email Us' },
+      { href: '/about',                            label: 'About' },
+    ],
+  },
+];
 ---
 
 <footer class="footer">
-  <div class="container footer-content">
+  <!-- Top gradient divider -->
+  <div class="footer-gradient" aria-hidden="true"></div>
+
+  <div class="container footer-inner">
+
+    <!-- Grid: brand + columns -->
     <div class="footer-grid">
+
+      <!-- Brand -->
       <div class="footer-brand">
-        <a href="/" class="logo"><span class="logo-dot">.</span>Rockets</a>
-        <p class="footer-desc">Open Source AI Agents & Automation.<br/>Built from Koh Phangan 🌴</p>
+        <a href="/" class="footer-logo" aria-label="DotRockets Home">
+          <span class="logo-dot">.</span><span>Rockets</span>
+        </a>
+        <p class="footer-tagline">
+          Open-source AI automation for digital nomads and entrepreneurs.
+          Built from Koh Phangan 🌴
+        </p>
+
+        <!-- Social pills -->
+        <div class="footer-social">
+          <a href="https://github.com/dotrockets" target="_blank" rel="noopener" class="social-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>
+            GitHub
+          </a>
+          <a href="https://t.me/dotrockets" target="_blank" rel="noopener" class="social-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.94.44l-2.6-1.92-1.25 1.2c-.14.14-.26.26-.53.26l.19-2.67 4.84-4.37c.21-.19-.05-.29-.32-.1L7.69 14.49l-2.56-.8c-.56-.17-.57-.56.12-.83l10.02-3.86c.46-.17.87.11.37.8Z"/></svg>
+            Telegram
+          </a>
+        </div>
       </div>
-      
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/agents">Agents</a>
-        <a href="/services">Services</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/status">Status</a>
-      </div>
-      
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <a href="/blog">Blog</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/docs">Documentation</a>
-        <a href="https://github.com/dotrockets" target="_blank" rel="noopener">GitHub</a>
-      </div>
-      
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <a href="/contact">Contact</a>
-        <a href="https://t.me/dotrockets" target="_blank" rel="noopener">Telegram</a>
-        <a href="mailto:hello@dotrockets.space">Email</a>
-      </div>
+
+      <!-- Link columns -->
+      {columns.map(col => (
+        <div class="footer-col">
+          <h4 class="footer-col-heading">{col.heading}</h4>
+          <ul>
+            {col.links.map(link => (
+              <li>
+                <a
+                  href={link.href}
+                  class="footer-link"
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
     </div>
-    
+
+    <!-- Bottom bar -->
     <div class="footer-bottom">
-      <p>&copy; {year} DotRockets. Open source, open mind.</p>
-      <div class="footer-links">
-        <a href="/privacy">Privacy</a>
-        <a href="/imprint">Imprint</a>
+      <p class="footer-copy">
+        &copy; {year} DotRockets &mdash; Open source, open mind.
+      </p>
+      <div class="footer-legal">
+        <a href="/privacy" class="footer-legal-link">Privacy</a>
+        <a href="/imprint" class="footer-legal-link">Imprint</a>
       </div>
     </div>
+
   </div>
 </footer>
 
 <style>
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: 4rem 0 2rem;
-    margin-top: 6rem;
+  /* ── Gradient top border ── */
+  .footer-gradient {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--border) 20%,
+      var(--border) 80%,
+      transparent 100%
+    );
   }
+
+  .footer {
+    padding: 0;
+    margin-top: var(--space-24);
+    background: var(--bg-secondary);
+  }
+
+  .footer-inner {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  /* ── Grid ── */
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 3rem;
+    margin-bottom: 3.5rem;
   }
-  @media (max-width: 768px) {
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-brand { grid-column: 1 / -1; }
   }
-  .logo-dot { color: var(--brand); font-size: 1.5rem; }
-  .logo { font-weight: 700; font-size: 1.25rem; }
-  .footer-desc { color: var(--text-tertiary); font-size: 0.875rem; margin-top: 0.75rem; line-height: 1.6; }
-  .footer-col { display: flex; flex-direction: column; gap: 0.75rem; }
-  .footer-col h4 { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); }
-  .footer-col a { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.15s; }
-  .footer-col a:hover { color: var(--text-primary); }
+  @media (max-width: 500px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Brand block ── */
+  .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 1px;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  .logo-dot {
+    background: var(--gradient-brand);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.6rem;
+    line-height: 1;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  .footer-tagline {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    line-height: 1.65;
+    max-width: 300px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .social-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .social-pill:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+    background: var(--bg-hover);
+  }
+
+  /* ── Link columns ── */
+  .footer-col { display: flex; flex-direction: column; }
+
+  .footer-col-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .footer-link {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: color 0.15s;
+  }
+  .footer-link:hover { color: var(--text-primary); }
+
+  /* ── Bottom bar ── */
   .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 3rem;
+    gap: 1rem;
     padding-top: 2rem;
     border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .footer-copy {
     font-size: 0.8125rem;
     color: var(--text-tertiary);
   }
-  .footer-links { display: flex; gap: 1.5rem; }
-  .footer-links a { color: var(--text-tertiary); transition: color 0.15s; }
-  .footer-links a:hover { color: var(--text-secondary); }
+  .footer-legal {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .footer-legal-link {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    transition: color 0.15s;
+  }
+  .footer-legal-link:hover { color: var(--text-secondary); }
 </style>

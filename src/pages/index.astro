@@ -9,8 +9,8 @@ const agents = [
   {
     name: 'Helios',
     emoji: '☀️',
-    tagline: 'Your Spiritual Content Engine',
-    description: 'Transforms Schumann resonance data and spiritual insights into engaging content for wellness brands.',
+    tagline: 'Spiritual Content Engine',
+    description: 'Transforms Schumann resonance data and spiritual insights into scroll-stopping content for wellness brands.',
     capabilities: ['Content Generation', 'Schumann Tracking', 'Social Media', 'SEO'],
     color: '#f97316',
   },
@@ -18,205 +18,613 @@ const agents = [
     name: 'Alfred',
     emoji: '🎩',
     tagline: 'Your Digital Butler',
-    description: 'Manages daily briefings, email triage, calendar optimization, and task prioritization.',
-    capabilities: ['Email Management', 'Calendar', 'Daily Briefings', 'Task Routing'],
+    description: 'Manages daily briefings, email triage, calendar optimization, and intelligent task prioritization.',
+    capabilities: ['Email Triage', 'Calendar Sync', 'Daily Briefings', 'Task Routing'],
     color: '#3b82f6',
   },
   {
     name: 'Research',
     emoji: '🔍',
     tagline: 'Intelligence on Demand',
-    description: 'Deep web research, competitive analysis, trend monitoring, and market intelligence.',
+    description: 'Deep web research, competitive analysis, trend monitoring, and boardroom-ready market intelligence.',
     capabilities: ['Web Research', 'Competitive Analysis', 'Trend Monitoring', 'Reports'],
     color: '#8b5cf6',
   },
   {
     name: 'Llama',
     emoji: '🦙',
-    tagline: 'Open Source. Local. Private.',
-    description: 'Powered by Meta\'s Llama models running locally. Full privacy, zero API costs, unlimited usage.',
+    tagline: 'Open Source · Local · Private',
+    description: 'Powered by Meta\'s Llama models running entirely on your machine. Full privacy, zero API costs, unlimited usage.',
     capabilities: ['Local Inference', 'Privacy-First', 'Unlimited Usage', 'Fine-tuning'],
     color: '#22c55e',
   },
 ];
 
 const features = [
-  { icon: '🤖', title: 'Agents, Not Tools', desc: 'Autonomous AI that thinks, decides, and delivers.' },
-  { icon: '⚡', title: 'Automate Everything', desc: 'Visual n8n workflows. Connect 400+ apps without code.' },
-  { icon: '🔓', title: '$0 vs $200/mo', desc: 'Same power as enterprise platforms. Zero cost. Full transparency.' },
-  { icon: '🌍', title: 'Nomad-Ready', desc: 'Run your business from anywhere. Works on beach WiFi.' },
+  {
+    icon: '🤖',
+    title: 'Agents, Not Tools',
+    desc: 'Autonomous AI that observes, decides, and delivers — no babysitting required.',
+    color: '#f97316',
+  },
+  {
+    icon: '⚡',
+    title: 'Automate Everything',
+    desc: 'Visual n8n workflows connect 400+ apps without writing a single line of code.',
+    color: '#3b82f6',
+  },
+  {
+    icon: '🔓',
+    title: '$0 vs. $200/mo',
+    desc: 'Same enterprise power as premium platforms. Open source, always free, fully yours.',
+    color: '#8b5cf6',
+  },
+  {
+    icon: '🌍',
+    title: 'Nomad-Ready',
+    desc: 'Run your entire business from a beach in Thailand. Works on any connection.',
+    color: '#22c55e',
+  },
+];
+
+const trustItems = [
+  { value: '99.9%', label: 'Uptime' },
+  { value: '100%', label: 'Open Source' },
+  { value: '$0', label: 'Platform Cost' },
+  { value: '24h', label: 'Go-Live SLA' },
 ];
 ---
 
 <BaseLayout title="DotRockets — Open Source AI Agents & Automation">
   <Header slot="header" />
-  
-  <!-- Hero -->
+
+  <!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
   <section class="hero">
-    <div class="container hero-content">
+    <!-- Background orbs -->
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+    <!-- Grid overlay -->
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <div class="container hero-body">
+      <!-- Badge -->
       <div class="hero-badge reveal">
         <span class="status-dot"></span>
-        4 Agents Live · 100% Open Source
+        4 Agents Live &nbsp;·&nbsp; 100% Open Source
       </div>
-      
+
+      <!-- Headline -->
       <h1 class="hero-title reveal">
         AI Agents That Work.<br/>
         <span class="gradient-text">For $0.</span>
       </h1>
-      
+
+      <!-- Subline -->
       <p class="hero-sub reveal">
         Open-source AI automation for digital nomads and entrepreneurs.<br/>
-        No subscriptions. No vendor lock-in. Just results.
+        No subscriptions. No vendor lock-in. Just&nbsp;results.
       </p>
-      
+
+      <!-- CTAs -->
       <div class="hero-cta reveal">
-        <a href="/agents" class="btn btn-primary">Meet Our Agents →</a>
-        <a href="/pricing" class="btn btn-secondary">See Pricing</a>
+        <a href="/agents" class="btn btn-primary btn-lg">
+          Meet Our Agents
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/pricing" class="btn btn-secondary btn-lg">See Pricing</a>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="trust-strip reveal">
+        {trustItems.map(item => (
+          <div class="trust-item">
+            <span class="trust-value">{item.value}</span>
+            <span class="trust-label">{item.label}</span>
+          </div>
+        ))}
       </div>
     </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+    </div>
   </section>
-  
-  <!-- Live Stats -->
-  <section class="container reveal">
+
+  <!-- ══════════════════════════════════ STATS ══════════════════════════════════ -->
+  <section class="stats-section container reveal">
     <LiveStats client:visible />
   </section>
-  
-  <!-- Features -->
+
+  <!-- ════════════════════════════════ FEATURES ════════════════════════════════ -->
   <section class="section container">
-    <div class="features-grid">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Why DotRockets</p>
+      <h2 class="section-title">Everything you need.<br/>Nothing you don't.</h2>
+    </div>
+
+    <div class="features-grid stagger">
       {features.map(f => (
-        <div class="feature-card glass reveal">
-          <div class="feature-icon">{f.icon}</div>
+        <div class="feature-card reveal" style={`--feature-color: ${f.color};`}>
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">{f.icon}</span>
+          </div>
           <h3 class="feature-title">{f.title}</h3>
           <p class="feature-desc">{f.desc}</p>
         </div>
       ))}
     </div>
   </section>
-  
-  <!-- Agents Preview -->
+
+  <!-- ════════════════════════════════ AGENTS ════════════════════════════════ -->
   <section class="section container">
     <div class="section-header reveal">
-      <h2>Meet the Squad</h2>
-      <p class="section-sub">Four AI agents. Each with a specialty. All working together.</p>
+      <p class="section-eyebrow">The Squad</p>
+      <h2 class="section-title">Meet Your AI Team</h2>
+      <p class="section-sub">Four autonomous agents. Each a specialist. All working together.</p>
     </div>
-    <div class="agents-grid">
+
+    <div class="agents-grid stagger">
       {agents.map(agent => (
         <AgentCard {...agent} />
       ))}
     </div>
-  </section>
-  
-  <!-- Social Proof -->
-  <section class="section container">
-    <div class="proof-card glass reveal">
-      <blockquote class="proof-quote">
-        "From 2% to 12% conversion rate. Helios transformed our content strategy completely."
-      </blockquote>
-      <div class="proof-meta">
-        <strong>Haus der Energien</strong> · Case Study
-      </div>
-      <a href="/case-studies" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Case Study →</a>
+
+    <div class="agents-cta reveal">
+      <a href="/agents" class="btn btn-secondary">Explore All Agents →</a>
     </div>
   </section>
-  
-  <!-- CTA -->
-  <section class="section container">
-    <div class="cta-section reveal">
-      <h2 class="gradient-text">Ready to automate?</h2>
-      <p class="cta-sub">Get started in under 24 hours. No setup fees.</p>
-      <div class="hero-cta">
-        <a href="/contact" class="btn btn-primary">Let's Talk →</a>
-        <a href="/services" class="btn btn-secondary">View Services</a>
+
+  <!-- ══════════════════════════════ SOCIAL PROOF ══════════════════════════════ -->
+  <section class="section-sm container">
+    <div class="proof-wrapper reveal">
+      <div class="proof-card glass">
+        <div class="proof-stars" aria-label="5 out of 5 stars">
+          {'★★★★★'.split('').map(s => <span class="star">{s}</span>)}
+        </div>
+        <blockquote class="proof-quote">
+          "From 2% to 12% conversion rate. Helios completely transformed our content strategy — in 30 days."
+        </blockquote>
+        <div class="proof-author">
+          <div class="proof-avatar">H</div>
+          <div>
+            <strong>Haus der Energien</strong>
+            <span class="proof-role">Wellness Brand · Munich</span>
+          </div>
+        </div>
+        <a href="/case-studies" class="btn btn-secondary btn-sm" style="margin-top: 1.75rem; align-self: flex-start;">
+          Read the Case Study →
+        </a>
+      </div>
+
+      <!-- Side stat -->
+      <div class="proof-stat-col">
+        <div class="proof-stat-card">
+          <span class="proof-stat-number gradient-text-brand">6×</span>
+          <span class="proof-stat-label">Conversion Lift</span>
+        </div>
+        <div class="proof-stat-card">
+          <span class="proof-stat-number gradient-text-brand">30</span>
+          <span class="proof-stat-label">Days to Results</span>
+        </div>
+        <div class="proof-stat-card">
+          <span class="proof-stat-number gradient-text-brand">$0</span>
+          <span class="proof-stat-label">Ongoing Platform Cost</span>
+        </div>
       </div>
     </div>
   </section>
-  
+
+  <!-- ════════════════════════════════ CTA BAND ════════════════════════════════ -->
+  <section class="section container">
+    <div class="cta-band reveal">
+      <!-- Glow orb inside -->
+      <div class="cta-orb" aria-hidden="true"></div>
+
+      <p class="cta-eyebrow">Ready to automate?</p>
+      <h2 class="cta-title gradient-text">Start in 24&nbsp;hours.</h2>
+      <p class="cta-sub">No setup fees. No lock-in. We get you live fast — and keep you that way.</p>
+
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-primary btn-lg">
+          Let's Talk
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/services" class="btn btn-ghost btn-lg">View All Services</a>
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
 </BaseLayout>
 
 <style>
+  /* ═══════ HERO ═══════ */
   .hero {
-    padding: 8rem 0 4rem;
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 0 6rem;
+    overflow: hidden;
     text-align: center;
   }
-  .hero-content { max-width: 800px; margin: 0 auto; }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent);
+    pointer-events: none;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    animation: glow-pulse 6s ease infinite;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(249,115,22,0.12), transparent 70%);
+    top: -100px; left: 50%; transform: translateX(-50%);
+    animation-delay: 0s;
+  }
+  .hero-orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(139,92,246,0.10), transparent 70%);
+    bottom: 0; right: -100px;
+    animation-delay: 2s;
+  }
+  .hero-orb-3 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%);
+    top: 40%; left: -80px;
+    animation-delay: 4s;
+  }
+
+  .hero-body {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+  }
+
+  /* Badge */
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    border-radius: 100px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
+    gap: 10px;
+    padding: 7px 18px;
+    border-radius: var(--radius-full);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
     font-size: 0.8125rem;
-    color: var(--text-secondary);
     font-weight: 500;
-    margin-bottom: 2rem;
-  }
-  .hero-title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-sub {
-    font-size: 1.125rem;
     color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.25rem;
+    backdrop-filter: blur(8px);
+    letter-spacing: 0.01em;
   }
+
+  /* Headline */
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.045em;
+    margin-bottom: 1.5rem;
+    transition-delay: 0.08s;
+  }
+
+  /* Subline */
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 2.75rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    transition-delay: 0.16s;
+  }
+
+  /* CTA row */
   .hero-cta {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+    transition-delay: 0.24s;
   }
-  
-  .section { padding: 5rem 0; }
-  .section-header { text-align: center; margin-bottom: 3rem; }
-  .section-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-  .section-sub { color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.0625rem; }
-  
+
+  /* Trust strip */
+  .trust-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+    transition-delay: 0.32s;
+  }
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 0.5rem 2rem;
+    border-right: 1px solid var(--border);
+  }
+  .trust-item:last-child { border-right: none; }
+  @media (max-width: 600px) {
+    .trust-item { padding: 0.5rem 1.25rem; }
+  }
+  .trust-value {
+    font-size: 1.375rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+  }
+  .trust-label {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.5;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--text-tertiary), transparent);
+    animation: float 2s ease infinite;
+  }
+
+  /* ═══════ STATS ═══════ */
+  .stats-section {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══════ FEATURES ═══════ */
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
   }
-  .feature-card { padding: 2rem; text-align: center; }
-  .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .feature-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .feature-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
-  
+
+  .feature-card {
+    position: relative;
+    background: var(--bg-card, var(--bg-secondary));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.75rem;
+    overflow: hidden;
+    transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  }
+  /* Top accent bar */
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--feature-color, var(--brand));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  /* Subtle gradient fill */
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 30% 0%, color-mix(in srgb, var(--feature-color, var(--brand)) 8%, transparent), transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover {
+    border-color: color-mix(in srgb, var(--feature-color, var(--brand)) 30%, var(--border));
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+  .feature-card:hover::before,
+  .feature-card:hover::after { opacity: 1; }
+
+  .feature-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--feature-color, var(--brand)) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.375rem;
+    margin-bottom: 1.25rem;
+  }
+  .feature-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  .feature-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* ═══════ AGENTS ═══════ */
   .agents-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
   }
-  
+  .agents-cta {
+    text-align: center;
+  }
+
+  /* ═══════ SOCIAL PROOF ═══════ */
+  .proof-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .proof-wrapper { grid-template-columns: 1fr; }
+    .proof-stat-col { display: flex; flex-direction: row; gap: 1rem; flex-wrap: wrap; }
+  }
+
   .proof-card {
-    padding: 3rem;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
   }
+  .proof-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1.25rem;
+  }
+  .star { color: var(--brand); font-size: 1.125rem; }
   .proof-quote {
-    font-size: 1.25rem;
+    font-size: 1.1875rem;
     font-style: italic;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    flex: 1;
   }
-  .proof-meta {
-    margin-top: 1rem;
+  .proof-author {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  .proof-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-brand);
+    background-size: 200% 200%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
     font-size: 0.875rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .proof-role {
+    display: block;
+    font-size: 0.8125rem;
     color: var(--text-tertiary);
+    margin-top: 2px;
   }
-  
-  .cta-section {
+
+  .proof-stat-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .proof-stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
     text-align: center;
-    padding: 4rem 0;
+    min-width: 140px;
   }
-  .cta-section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
-  .cta-sub { color: var(--text-secondary); font-size: 1.0625rem; margin-bottom: 2rem; }
+  .proof-stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.375rem;
+  }
+  .proof-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ═══════ CTA BAND ═══════ */
+  .cta-band {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    padding: 5rem 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .cta-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(249,115,22,0.08), transparent 60%);
+    pointer-events: none;
+    animation: glow-pulse 4s ease infinite;
+  }
+  .cta-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand);
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .cta-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .cta-sub {
+    color: var(--text-secondary);
+    font-size: 1.0625rem;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.65;
+    position: relative;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
 </style>

@@ -24,42 +24,53 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    
+
+    <!-- Anti-FOUC: restore theme before paint -->
+    <script is:inline>
+      (function() {
+        try {
+          var t = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', t);
+        } catch(e) {}
+      })();
+    </script>
+
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    
+
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
-    
+    <meta property="og:image"       content={new URL(image, Astro.site)} />
+
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.site)} />
-    
+    <meta name="twitter:image"       content={new URL(image, Astro.site)} />
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
-    <!-- Preconnect -->
+
+    <!-- Fonts preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
-    
+
     <style>
-      /* Critical CSS inline */
+      /* Critical CSS: fade-in body to prevent flash */
       body {
         opacity: 0;
-        animation: fadeIn 0.3s ease forwards;
+        animation: _bodyFadeIn 0.25s ease 0.05s forwards;
       }
-      @keyframes fadeIn {
+      @keyframes _bodyFadeIn {
         to { opacity: 1; }
       }
     </style>
@@ -70,8 +81,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <slot name="footer" />
-    
-    <!-- Scroll Reveal Observer -->
+
+    <!-- Scroll-reveal observer -->
     <script>
       const observer = new IntersectionObserver(
         (entries) => {
@@ -82,13 +93,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
       );
-      
+
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
-    
-    <!-- Starfield Background -->
+
+    <!-- Starfield background -->
     <script src="/starfield.js" defer></script>
   </body>
 </html>
